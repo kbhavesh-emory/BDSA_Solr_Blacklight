@@ -6,7 +6,7 @@ A ready-to-run starter that indexes your Brain Digital Slide Archive (DSA) items
 
 A ready-to-run Docker-based stack that indexes Brain Digital Slide Archive (DSA) items into Apache Solr, serves a faceted image gallery via Blacklight, and exposes a FastAPI ETL service for metadata indexing.
 
-## 🎯 Features
+## Features
 
 - **Apache Solr 9** – Search engine with pre-configured `bdsa` collection and schema
 - **FastAPI ETL Service** – Authenticates with Girder/DSA, fetches items, and indexes into Solr
@@ -20,7 +20,7 @@ A ready-to-run Docker-based stack that indexes Brain Digital Slide Archive (DSA)
 - A BDSA/Girder instance with API key
 - Folder ID(s) or item IDs to index
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone and configure
 
@@ -55,7 +55,7 @@ curl -X POST http://localhost:8081/reindex_folder
 
 Open your browser to **http://localhost:3001** (or your host URL)
 
-## 📚 Project Structure
+## Project Structure
 
 ```
 .
@@ -76,7 +76,7 @@ Open your browser to **http://localhost:3001** (or your host URL)
 └── nginx.conf                   # (Optional) reverse proxy config
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 ### ETL Service (`etl/.env`)
 
@@ -104,7 +104,7 @@ The ETL maps DSA item metadata to these Solr fields:
 
 See `etl/mapping.py` to customize field extraction.
 
-## 🔗 API Endpoints
+## API Endpoints
 
 ### ETL Service
 
@@ -136,7 +136,7 @@ curl "http://localhost:8983/solr/bdsa/select?q=*:*&rows=0"
 - **Faceted search** – http://localhost:3001/?q=searchterm
 - **Admin** – http://localhost:3001/admin
 
-## 💡 Common Tasks
+## Common Tasks
 
 ### Reindex a specific folder
 
@@ -174,7 +174,7 @@ curl "http://localhost:8983/solr/bdsa/select?q=*:*&rows=0" | jq .response.numFou
 curl "http://localhost:8983/solr/bdsa/select?q=np_regionName:*&rows=5&facet=true&facet.field=np_stainID"
 ```
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### "BDSA_FOLDER_ID is not set"
 
@@ -204,7 +204,7 @@ services:
 
 Then restart: `docker compose up -d`
 
-## 📖 Advanced Usage
+## Advanced Usage
 
 ### Add custom fields
 
@@ -226,7 +226,7 @@ Store ACL metadata in Solr fields and enforce access control in Blacklight using
 
 Extend the manifest endpoints to proxy DSA tiles through an IIIF compliance layer (e.g., [Cantaloupe](https://cantaloupe-project.github.io/)).
 
-## 📝 Development
+## Development
 
 ### Run tests
 
