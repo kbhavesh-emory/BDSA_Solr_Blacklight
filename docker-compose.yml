@@ -1,0 +1,59 @@
+services:
+  solr:
+    image: solr:9
+    ports:
+      - "8983:8983"
+    command: ["solr-precreate", "bdsa"]
+    healthcheck:
+      test: ["CMD", "bash", "-lc", "curl -fsS http://localhost:8983/solr/admin/cores?action=STATUS | grep -q bdsa"]
+      interval: 5s
+      timeout: 3s
+      retries: 60
+
+  schema-init:
+    image: python:3.11-slim
+    depends_on:
+      solr:
+        condition: service_healthy
+    volumes:
+      - ./solr/solr_schema_bootstrap.json:/work/solr_schema_bootstrap.json:ro
+      - ./solr/apply_schema.py:/work/apply_schema.py:ro
+    environment:
+      SOLR_CORE_URL: http://solr:8983/solr/bdsa
+      SOLR_SCHEMA_FILE: /work/solr_schema_bootstrap.json
+    command: bash -lc "python /work/apply_schema.py"
+
+  etl:
+    build: ./etl
+    env_file: ./etl/.env
+    depends_on:
+      schema-init:
+        condition: service_completed_successfully
+    ports:
+      - "8081:8081"
+
+  blacklight:
+    build: ./blacklight
+    environment:
+      SOLR_URL: http://solr:8983/solr/bdsa
+      RAILS_ENV: development
+      SECRET_KEY_BASE: change_me_please_123
+      RAILS_ADDITIONAL_HOSTS: "einstein.neurology.emory.edu,einstein.neurology.emory.edu:3001,blacklight,blacklight:3000,localhost,localhost:3000"
+      BDSA_API_KEY: ${BDSA_API_KEY:-}
+      DSA_BASE_URL: ${DSA_BASE_URL:-http://bdsa.pathology.emory.edu:8080/api/v1}
+    depends_on:
+      schema-init:
+        condition: service_completed_successfully
+    ports:
+      - "3001:3000"
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:stable-alpine
+    depends_on:
+      - blacklight
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped

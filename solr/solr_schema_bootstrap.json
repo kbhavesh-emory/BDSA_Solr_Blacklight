@@ -1,0 +1,44 @@
+{
+  "add-field-type": [
+    {
+      "name": "string_ci",
+      "class": "solr.TextField",
+      "sortMissingLast": true,
+      "omitNorms": true,
+      "analyzer": {
+        "tokenizer": { "class": "solr.KeywordTokenizerFactory" },
+        "filters": [
+          { "class": "solr.LowerCaseFilterFactory" },
+          { "class": "solr.TrimFilterFactory" }
+        ]
+      }
+    }
+  ],
+  "add-field": [
+    { "name": "id",           "type": "string",     "stored": true,  "indexed": true, "required": true },
+    { "name": "item_id",      "type": "string",     "stored": true,  "indexed": true },
+    { "name": "name",         "type": "text_general","stored": true, "indexed": true },
+
+    { "name": "metadata",     "type": "string_ci",  "stored": true,  "indexed": true },
+    { "name": "bad_imageno",  "type": "string_ci",  "stored": true,  "indexed": true },
+
+    { "name": "np_blockID",   "type": "string_ci",  "stored": true,  "indexed": true },
+    { "name": "np_caseID",    "type": "string_ci",  "stored": true,  "indexed": true },
+    { "name": "np_regionName","type": "string_ci",  "stored": true,  "indexed": true },
+    { "name": "np_stainID",   "type": "string_ci",  "stored": true,  "indexed": true },
+
+    { "name": "created",      "type": "pdate",      "stored": true,  "indexed": true },
+    { "name": "updated",      "type": "pdate",      "stored": true,  "indexed": true },
+
+    { "name": "text",         "type": "text_general","stored": false, "indexed": true, "multiValued": true }
+  ],
+  "add-copy-field": [
+    { "source": "name",        "dest": "text" },
+    { "source": "metadata",    "dest": "text" },
+    { "source": "bad_imageno", "dest": "text" },
+    { "source": "np_blockID",  "dest": "text" },
+    { "source": "np_caseID",   "dest": "text" },
+    { "source": "np_regionName","dest": "text" },
+    { "source": "np_stainID",  "dest": "text" }
+  ]
+}
