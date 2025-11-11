@@ -83,7 +83,7 @@ Open your browser to **http://localhost:3001** (or your host URL)
 ```bash
 BDSA_BASE=http://bdsa.pathology.emory.edu:8080/api/v1
 BDSA_API_KEY=your-girder-api-key-here
-BDSA_FOLDER_ID=67c613b665fd0aa585966699
+BDSA_FOLDER_ID=your-bdsa-folder-id
 SOLR_UPDATE=http://solr:8983/solr/bdsa/update?commitWithin=5000
 BATCH_SIZE=200
 DEFAULT_SINCE=2000-01-01T00:00:00Z
