@@ -1,5 +1,4 @@
-# BDSA Search - Solr and_Blacklight
-
+# BDSA Medical Image Search
 
 A full-stack medical image search and visualization system integrating BDSA (Digital Slide Archive) with Apache Solr and Blacklight Rails. Features intelligent deduplication, incremental indexing, and an interactive web gallery for browsing pathology slide collections.
 
@@ -7,42 +6,42 @@ A full-stack medical image search and visualization system integrating BDSA (Dig
 [![License](https://img.shields.io/badge/license-MIT-blue)]()
 [![Docker](https://img.shields.io/badge/docker-supported-blue?logo=docker)]()
 
-## Features
+## 🎯 Features
 
-### Intelligent Indexing
+### 📊 Intelligent Indexing
 - **Smart Incremental Indexing** - Detect changes using SHA256 content hashes, skip unchanged files
 - **Filename-Based Deduplication** - Same image name from different folders indexed only once
 - **Metadata Comparison** - Automatically update when metadata changes
 - **Batch Processing** - Efficiently index thousands of images with configurable batch sizes
 
-### Gallery & Search
+### 🎨 Gallery & Search
 - **Full-Text Search** - Search across image names, metadata, case IDs, regions, stains
 - **Faceted Navigation** - Filter by region, staining marker, case ID, and block number
 - **Interactive Viewer** - Zoom (1x to 10x), pan, and rotate medical images
 - **Responsive Design** - Works on desktop and tablet devices
 - **Pagination** - 12 images per page with smooth navigation
 
-### Multi-Folder Support
+### 🔄 Multi-Folder Support
 - Index images from multiple BDSA folders simultaneously
 - Deduplication across folder boundaries
 - Automatic metadata conflicts resolution
 - Works seamlessly with different folder structures
 
-### Technology Stack
+### 🚀 Technology Stack
 - **Backend**: FastAPI + Apache Solr 9
 - **Frontend**: Blacklight Rails 8.12.2
 - **Containerization**: Docker Compose
 - **API**: BDSA (Digital Slide Archive) integration
 - **Database**: Solr full-text search index
 
-## Requirements
+## 📋 Requirements
 
 - Docker & Docker Compose
 - BDSA API credentials
 - 4GB+ RAM recommended
 - 10GB+ disk space for image cache
 
-## Quick Start
+## 🚀 Quick Start
 
 ### 1. Clone & Setup
 ```bash
@@ -56,7 +55,7 @@ cd bdsa-search
 cat > etl/.env << EOF
 BDSA_BASE=http://bdsa.pathology.emory.edu:8080/api/v1
 BDSA_API_KEY=your_api_key_here
-BDSA_FOLDER_ID=Folder ID  # Optional: default folder
+BDSA_FOLDER_ID=67c5f83165fd0aa5859665b7  # Optional: default folder
 SOLR_UPDATE=http://solr:8983/solr/bdsa/update?commitWithin=5000
 SOLR_QUERY=http://solr:8983/solr/bdsa/select
 BATCH_SIZE=200
@@ -87,7 +86,7 @@ curl -X POST 'http://localhost:8081/reindex_folder?folder_id=67c5f83165fd0aa5859
 http://localhost:3001/
 ```
 
-## Usage Guide
+## 📖 Usage Guide
 
 ### Gallery Features
 
@@ -150,9 +149,9 @@ The system uses **filename-based deduplication** to ensure each unique image app
 
 | Scenario | Action | Result |
 |----------|--------|--------|
-| New filename | INDEX | Added to gallery |
-| Same filename + Same metadata | SKIP  | No change |
-| Same filename + Different metadata | UPDATE  | Latest version kept |
+| New filename | INDEX ✨ | Added to gallery |
+| Same filename + Same metadata | SKIP ⏭️ | No change |
+| Same filename + Different metadata | UPDATE 🔄 | Latest version kept |
 
 **Example:**
 ```
@@ -162,7 +161,7 @@ Folder 3: A17-47_4_AB.svs (metadata v2) → Updated
 Result: One entry with latest metadata
 ```
 
-## Architecture
+## 🏗️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -197,7 +196,7 @@ Result: One entry with latest metadata
 └─────────────────────────────────────────────────────────┘
 ```
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 bdsa-search/
@@ -227,7 +226,7 @@ bdsa-search/
         └── routes.rb
 ```
 
-## Configuration
+## 🔧 Configuration
 
 ### ETL Service (.env)
 
@@ -255,7 +254,7 @@ Services configured:
 - **blacklight** (port 3001) - Web gallery
 - **nginx** (port 80) - Reverse proxy
 
-## Troubleshooting
+## 🚨 Troubleshooting
 
 ### Solr connection issues
 ```bash
@@ -295,7 +294,7 @@ curl -X POST 'http://localhost:8983/solr/bdsa/update?commit=true' \
 curl -X POST 'http://localhost:8081/reindex_folder_force?folder_id=YOUR_FOLDER_ID'
 ```
 
-## API Endpoints
+## 📊 API Endpoints
 
 ### ETL Service
 | Endpoint | Method | Purpose |
@@ -313,7 +312,7 @@ curl -X POST 'http://localhost:8081/reindex_folder_force?folder_id=YOUR_FOLDER_I
 | `http://localhost:8983/solr/bdsa/select?q=name:A17-47_4_AB.svs` | Find by filename |
 | `http://localhost:8983/solr/bdsa/select?q=np_caseID:E17-47` | Find by case ID |
 
-## Performance
+## 📈 Performance
 
 ### Indexing Speed
 - **Single folder**: 50-100 images/min (depends on metadata size)
@@ -330,7 +329,7 @@ curl -X POST 'http://localhost:8081/reindex_folder_force?folder_id=YOUR_FOLDER_I
 - **ETL**: ~200MB
 - **Rails**: ~300MB
 
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -338,7 +337,7 @@ curl -X POST 'http://localhost:8081/reindex_folder_force?folder_id=YOUR_FOLDER_I
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## Key Features Explained
+## 📝 Key Features Explained
 
 ### Smart Incremental Indexing
 The system computes SHA256 hashes of document metadata (excluding timestamps and IDs). On re-indexing:
@@ -361,21 +360,25 @@ Browse images by:
 - **Case ID**: E18-108, A17-47, etc.
 - **Block ID**: Block numbers within cases
 
-## Acknowledgments
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
 
 - Built on [Blacklight](https://github.com/projectblacklight/blacklight) for discovery interface
 - Uses [Apache Solr](https://solr.apache.org/) for search indexing
 - Integrates with [Digital Slide Archive (BDSA)](https://github.com/DigitalSlideArchive/digital_slide_archive)
 - Deployed with [Docker](https://www.docker.com/)
 
-## Support
+## 📞 Support
 
 For issues, questions, or suggestions:
 1. Check existing [Issues](https://github.com/yourusername/bdsa-search/issues)
 2. Review [Documentation](./docs/)
 3. Create a new issue with detailed information
 
-## Related Resources
+## 🔗 Related Resources
 
 - [BDSA Documentation](http://docs.digitalslidearchive.emory.edu/)
 - [Blacklight Documentation](https://github.com/projectblacklight/blacklight/wiki)
@@ -384,7 +387,7 @@ For issues, questions, or suggestions:
 
 ---
 
-**Current Status**: Production Ready  
+**Current Status**: ✅ Production Ready  
 **Last Updated**: November 13, 2025  
 **Total Images**: 170+ indexed  
 **Gallery URL**: http://localhost:3001
