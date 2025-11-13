@@ -360,21 +360,6 @@ Browse images by:
 - **Block ID**: Block numbers within cases
 
 
-## Acknowledgments
-
-- Built on [Blacklight](https://github.com/projectblacklight/blacklight) for discovery interface
-- Uses [Apache Solr](https://solr.apache.org/) for search indexing
-- Integrates with [Digital Slide Archive (BDSA)](https://github.com/DigitalSlideArchive/digital_slide_archive)
-- Deployed with [Docker](https://www.docker.com/)
-
-
-## Related Resources
-
-- [BDSA Documentation](http://docs.digitalslidearchive.emory.edu/)
-- [Blacklight Documentation](https://github.com/projectblacklight/blacklight/wiki)
-- [Apache Solr Documentation](https://lucene.apache.org/solr/guide/)
-- [FastAPI Documentation](https://fastapi.tiangolo.com/)
-
-
+ 
 
 
