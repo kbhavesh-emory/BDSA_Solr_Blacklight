@@ -44,7 +44,7 @@ A full-stack medical image search and visualization system integrating BDSA (Dig
 
 ### 1. Clone & Setup
 ```bash
-git clone https://github.com/yourusername/bdsa-search.git
+git clone https://github.com/kbhavesh-emory/BDSA_Solr_Blacklight.git
 cd bdsa-search
 ```
 
@@ -374,6 +374,7 @@ Browse images by:
 - [Blacklight Documentation](https://github.com/projectblacklight/blacklight/wiki)
 - [Apache Solr Documentation](https://lucene.apache.org/solr/guide/)
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
+
 
 
 
