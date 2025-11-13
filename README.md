@@ -233,7 +233,7 @@ bdsa-search/
 # BDSA API Configuration
 BDSA_BASE=http://bdsa.pathology.emory.edu:8080/api/v1
 BDSA_API_KEY=your_api_key_here
-BDSA_FOLDER_ID=67c5f83165fd0aa5859665b7  # Default folder (optional)
+BDSA_FOLDER_ID=real-id' # Default folder (optional)
 
 # Solr Configuration
 SOLR_UPDATE=http://solr:8983/solr/bdsa/update?commitWithin=5000
@@ -253,7 +253,7 @@ Services configured:
 - **blacklight** (port 3001) - Web gallery
 - **nginx** (port 80) - Reverse proxy
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
 ### Solr connection issues
 ```bash
@@ -374,5 +374,6 @@ Browse images by:
 - [Blacklight Documentation](https://github.com/projectblacklight/blacklight/wiki)
 - [Apache Solr Documentation](https://lucene.apache.org/solr/guide/)
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
+
 
 
