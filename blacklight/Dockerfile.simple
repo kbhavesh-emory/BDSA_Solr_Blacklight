@@ -1,0 +1,28 @@
+FROM ruby:3.2
+
+ENV BUNDLE_APP_CONFIG=/usr/local/bundle \
+    PATH="/usr/local/bundle/bin:${PATH}"
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    nodejs npm build-essential git curl ca-certificates libsqlite3-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+ENV SOLR_URL=${SOLR_URL:-http://solr:8983/solr/bdsa}
+
+RUN gem install bundler -v "~>2" && \
+    gem install rails -v "~>7.1" && \
+    rails new bdsa-bl --skip-bundle && \
+    cd bdsa-bl && \
+    echo "gem 'blacklight', '~> 8.12'" >> Gemfile && \
+    echo "gem 'view_component', '~> 3.12'" >> Gemfile && \
+    bundle install && \
+    bundle exec rails g blacklight:install && \
+    bundle exec rails db:prepare
+
+WORKDIR /app/bdsa-bl
+
+COPY ./init_simple.sh /app/init_simple.sh
+RUN chmod +x /app/init_simple.sh
+
+CMD ["/app/init_simple.sh"]

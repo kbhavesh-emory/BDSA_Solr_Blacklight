@@ -8,14 +8,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY scripts/init_blacklight.sh /usr/local/bin/init_blacklight.sh
+COPY scripts/init_blacklight_simple.sh /usr/local/bin/init_blacklight.sh
 
 ARG SOLR_URL=http://solr:8983/solr/bdsa
 ARG RAILS_ADDITIONAL_HOSTS="einstein.neurology.emory.edu,einstein.neurology.emory.edu:3001,localhost,localhost:3000,blacklight,blacklight:3000"
 ENV SOLR_URL=$SOLR_URL \
     RAILS_ADDITIONAL_HOSTS=$RAILS_ADDITIONAL_HOSTS
 
-RUN chmod +x /usr/local/bin/init_blacklight.sh \
- && BLACKLIGHT_MODE=build /usr/local/bin/init_blacklight.sh
+RUN chmod +x /usr/local/bin/init_blacklight.sh
 
 CMD ["bash", "-lc", "init_blacklight.sh"]

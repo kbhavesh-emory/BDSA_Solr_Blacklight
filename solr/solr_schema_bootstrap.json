@@ -22,13 +22,14 @@
     { "name": "metadata",     "type": "string_ci",  "stored": true,  "indexed": true },
     { "name": "bad_imageno",  "type": "string_ci",  "stored": true,  "indexed": true },
 
-    { "name": "np_blockID",   "type": "string_ci",  "stored": true,  "indexed": true },
-    { "name": "np_caseID",    "type": "string_ci",  "stored": true,  "indexed": true },
-    { "name": "np_regionName","type": "string_ci",  "stored": true,  "indexed": true },
-    { "name": "np_stainID",   "type": "string_ci",  "stored": true,  "indexed": true },
+    { "name": "np_blockID",   "type": "string",     "stored": true,  "indexed": true, "docValues": true },
+    { "name": "np_caseID",    "type": "string",     "stored": true,  "indexed": true, "docValues": true },
+    { "name": "np_regionName","type": "string",     "stored": true,  "indexed": true, "docValues": true },
+    { "name": "np_stainID",   "type": "string",     "stored": true,  "indexed": true, "docValues": true },
 
     { "name": "created",      "type": "pdate",      "stored": true,  "indexed": true },
     { "name": "updated",      "type": "pdate",      "stored": true,  "indexed": true },
+    { "name": "_hash",        "type": "string",     "stored": true,  "indexed": true },
 
     { "name": "text",         "type": "text_general","stored": false, "indexed": true, "multiValued": true }
   ],
